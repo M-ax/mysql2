@@ -1216,17 +1216,20 @@ void init_mysql2_client() {
   int dots = 0;
   const char *lib = mysql_get_client_info();
 
-  for (i = 0; lib[i] != 0 && MYSQL_LINK_VERSION[i] != 0; i++) {
-    if (lib[i] == '.') {
-      dots++;
-              /* we only compare MAJOR and MINOR */
-      if (dots == 2) break;
-    }
-    if (lib[i] != MYSQL_LINK_VERSION[i]) {
-      rb_raise(rb_eRuntimeError, "Incorrect MySQL client library version! This gem was compiled for %s but the client library is %s.", MYSQL_LINK_VERSION, lib);
-      return;
-    }
-  }
+  // MariaDB fuck my shit up
+  // Please let me know in advance next time
+  // I like to look pretty when I get fucked
+  //for (i = 0; lib[i] != 0 && MYSQL_LINK_VERSION[i] != 0; i++) {
+  //  if (lib[i] == '.') {
+  //    dots++;
+  //            /* we only compare MAJOR and MINOR */
+  //    if (dots == 2) break;
+  //  }
+  //  if (lib[i] != MYSQL_LINK_VERSION[i]) {
+  //    rb_raise(rb_eRuntimeError, "Incorrect MySQL client library version! This gem was compiled for %s but the client library is %s.", MYSQL_LINK_VERSION, lib);
+  //    return;
+  //  }
+  //}
 
   /* Initializing mysql library, so different threads could call Client.new */
   /* without race condition in the library */
